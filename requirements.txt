@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+sqlalchemy
+aiosqlite
+email-validator
+pydantic
+greenlet
+pydantic-settings
+loguru
+pytest
+httpx
+alembic
+slowapi
