@@ -1,0 +1,14 @@
+run:
+	uvicorn main:app --reload
+
+migrate:
+	alembic upgrade head
+
+test:
+	pytest
+
+docker-up:
+	docker-compose up -d --build
+
+docker-down:
+	docker-compose down
