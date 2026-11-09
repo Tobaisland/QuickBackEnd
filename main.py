@@ -1,4 +1,5 @@
 from contextlib import asynccontextmanager
+from urllib import response
 from fastapi import FastAPI, Depends, HTTPException, Security, BackgroundTasks, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security.api_key import APIKeyHeader
@@ -54,6 +55,14 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan
 )
+
+@app.middleware("http")
+async def add_security_headers(request: Request, call_next):
+    response = await call_next(request)
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    response.headers["Content-Security-Policy"] = "default-src 'self'"
+    return response
 
 limiter = Limiter(key_func=get_remote_address)
 app.state.limiter = limiter

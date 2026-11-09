@@ -11,3 +11,9 @@ pytest
 httpx
 alembic
 slowapi
+asyncpg
+redis
+sqladmin
+itsdangerous
+python-jose[cryptography]
+passlib[bcrypt]
